@@ -1,5 +1,6 @@
 package com.gw.safedelivery.network
 
+import com.gw.safedelivery.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -10,7 +11,8 @@ object RetrofitClient {
 
     private val client by lazy {
         val logging = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
+            level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+            else HttpLoggingInterceptor.Level.NONE
         }
         OkHttpClient.Builder()
             .addInterceptor(logging)

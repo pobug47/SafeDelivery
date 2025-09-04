@@ -1,32 +1,29 @@
 package com.gw.safedelivery.ui.dialog
 
-import android.widget.Toast
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.TextFieldValue
 
 @Composable
-fun StoreNameInputDialog(onConfirm: (String) -> Unit, onDismiss: () -> Unit) {
-    var text by remember { mutableStateOf("") }
-    val context = LocalContext.current
+fun StoreUrlInputDialog(
+    onConfirm: (String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    var text by remember { mutableStateOf(TextFieldValue("")) }
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("업소명 입력") },
+        title = { Text("URL 입력") },
         text = {
             OutlinedTextField(
                 value = text,
                 onValueChange = { text = it },
-                label = { Text("업소명") }
+                label = { Text("업소 URL") }
             )
         },
         confirmButton = {
             TextButton(onClick = {
-                if (text.isNotBlank()) {
-                    onConfirm(text)
-                } else {
-                    Toast.makeText(context, "업소명을 입력해주세요", Toast.LENGTH_SHORT).show()
-                }
+                if (text.text.isNotBlank()) onConfirm(text.text.trim())
             }) {
                 Text("확인")
             }

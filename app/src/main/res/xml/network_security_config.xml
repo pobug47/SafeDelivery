@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- HTTP 평문 차단 + 사용자 추가 CA 차단 -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <!-- 시스템(OS) 기본 CA만 신뢰 -->
+            <certificates src="system"/>
+        </trust-anchors>
+    </base-config>
+</network-security-config>
